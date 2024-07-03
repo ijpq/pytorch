@@ -608,7 +608,7 @@ class SymFloat:
         raise TypeError("type stub not overridden")
 
     def __repr__(self):
-        return self.node.str()
+        return self.node._graph_repr()
 
 
 class SymBool:
@@ -666,7 +666,7 @@ class SymBool:
         raise TypeError("type stub not overridden")
 
     def __repr__(self):
-        return str(self.node)
+        return self.node._graph_repr()
 
     def __hash__(self):
         if self.node.is_constant():
