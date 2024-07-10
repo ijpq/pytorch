@@ -36,6 +36,9 @@ from typing import (
 )
 from typing_extensions import ParamSpec as _ParamSpec, TypeGuard as _TypeGuard
 
+if TYPE_CHECKING:
+    from .types import IntLikeType
+
 
 # multipy/deploy is setting this import before importing torch, this is the most
 # reliable way we have to detect if we're running within deploy.
@@ -471,6 +474,9 @@ class SymInt:
     def __add__(self, other) -> "SymInt":
         raise TypeError("type stub not overridden")
 
+    def __mod__(self, other: "IntLikeType") -> "SymInt":
+        raise TypeError("type stub not overridden")
+
     def __mul__(self, other) -> "SymInt":
         raise TypeError("type stub not overridden")
 
@@ -502,6 +508,9 @@ class SymInt:
         raise TypeError("type stub not overridden")
 
     def __neg__(self):
+        raise TypeError("type stub not overridden")
+
+    def __sub__(self, other: "IntLikeType") -> "SymInt":
         raise TypeError("type stub not overridden")
 
     def __repr__(self):
@@ -2250,8 +2259,7 @@ def compile(
     mode: _Union[str, None] = None,
     options: _Optional[_Dict[str, _Union[str, builtins.int, builtins.bool]]] = None,
     disable: builtins.bool = False,
-) -> _Callable[_InputT, _RetT]:
-    ...
+) -> _Callable[_InputT, _RetT]: ...
 
 
 @_overload
@@ -2264,8 +2272,7 @@ def compile(
     mode: _Union[str, None] = None,
     options: _Optional[_Dict[str, _Union[str, builtins.int, builtins.bool]]] = None,
     disable: builtins.bool = False,
-) -> _Callable[[_Callable[_InputT, _RetT]], _Callable[_InputT, _RetT]]:
-    ...
+) -> _Callable[[_Callable[_InputT, _RetT]], _Callable[_InputT, _RetT]]: ...
 
 
 def compile(
