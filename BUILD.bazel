@@ -708,6 +708,7 @@ cc_library(
         "@com_github_google_flatbuffers//:flatbuffers",
         "@local_config_python//:python_headers",
         "@onnx",
+        "@nlohmann",
     ],
     alwayslink = True,
 )
